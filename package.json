@@ -1,0 +1,20 @@
+{
+  "name": "cibuJIRA-sparkBot",
+  "version": "1.0.0",
+  "description": "Cisco cibu-jira Spark bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm install && node --use_strict index.js"
+  },
+  "repository": {
+  },
+
+  "author": "Ronit Pradhan",
+  "license": "ISC",
+
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "node-flint": "^4.2.1"
+  }
+}
