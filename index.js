@@ -1,7 +1,7 @@
 
 //**************Admin Credentials for authentication**************//
-var user = "jira-robot";
-var pass = "ctijtapitsp0";
+var user = "jira-spark-bot";
+var pass = "cisco123";
 var restUrl = "https://cibu-jira.cisco.com:8443/rest/api/latest/issue/";
 
 //****************************************************************//
@@ -113,6 +113,25 @@ flint.hears( "/get", function(bot, trigger) {
 				}
 			}
 			request(options, callback2);
+			break;
+			
+		case "assignee":
+			console.log("with %s ", trigger.args[1]);
+			var options = build('GET', null, trigger.args[2] + "?fields=assignee");
+			function callback3(error, response, body) {
+				if (!error && response.statusCode == 200) {
+					console.log("----> Successful response");
+					var info = JSON.parse(body);
+					bot.say('Assignee of %s: %s (%s)', trigger.args[2]
+						, JSON.stringify(info.fields.assignee.displayName)
+						, JSON.stringify(info.fields.assignee.name));
+				}
+				else {
+					console.log("Couldn't get the Assignee.");
+					bot.say("Couldn't get the Assignee.");
+				}
+			}
+			request(options, callback3);
 			break;
 			
 		default:
@@ -270,6 +289,7 @@ flint.hears("/help", function(bot, trigger) {
 		bot.say("Available Fields:");
 		bot.say("1.\t status : Status of the issue.");
 		bot.say("2.\t duedate : Duedate of the issue.");
+		bot.say("3.\t assignee : Assignee for the issue.");
 		bot.say(" ");
 		if(h_type != null) break;
   }
